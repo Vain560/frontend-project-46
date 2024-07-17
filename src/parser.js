@@ -6,10 +6,7 @@ export default (filepath) => {
 	const fileContent = fs.readFileSync(absolutePath, 'utf-8');
 	const ext = path.extname(filepath).toLowerCase();
 
-	let data;
-	if (ext ==='.json') data = JSON.parse(fileContent);
+	if (ext ==='.json') return JSON.parse(fileContent);
 	else throw new Error(`Unsupported file format: ${ext}`);
-
-	return data;
 };
 
