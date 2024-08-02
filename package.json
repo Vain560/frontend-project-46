@@ -3,18 +3,21 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Compares two configuration files and shows a difference.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint ."
-  },
-  "jest": {
-    "testEnvironment": "node"
+    "test":"npx jest"
   },
   "bin": {
-    "gendiff": "./bin/gendiff.js"
+    "gendiff": "/bin/gendiff.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vain560/frontend-project-46.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vain560/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/Vain560/frontend-project-46#readme",
   "author": "o_o",
   "license": "ISC",
   "dependencies": {
