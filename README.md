@@ -14,6 +14,13 @@ Compares two configuration files and show difference.
 ```sh
 gendiff <filepath1> <filepath2>
 ```
-## Example
+## Stylish Output
 
-[![asciicast](https://asciinema.org/a/2pdoAyCGdKuWtfbKrZWomVBYq.svg)](https://asciinema.org/a/2pdoAyCGdKuWtfbKrZWomVBYq)
+To compare two files and output the result in stylish format, use the following command:
+
+```
+gendiff <FILEPATH1> <FILEPATH2>
+```
+
+### Example of work:
+[![asciicast](https://asciinema.org/a/254qibEitMy7iMrxeviKUhgK6.svg)](https://asciinema.org/a/254qibEitMy7iMrxeviKUhgK6)

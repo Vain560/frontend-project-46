@@ -19,23 +19,26 @@ const tests = [
     file1: 'filepath1.json',
     file2: 'filepath2.json',
     title: 'JSON',
+    format: 'stylish'
   },
   {
     file1: 'filepath1.yml',
     file2: 'filepath2.yml',
     title: 'YML',
+    format: 'stylish'
   },
   {
     file1: 'filepath1.json',
     file2: 'filepath2.yml',
     title: 'mixed',
+    format: 'stylish'
   }
 ];
 
 test.each(tests)('TEST: $title', ({
-  file1, file2
+  file1, file2, format
 }) => {
-  const result = diff(file1, file2);
+  const result = diff(file1, file2, format);
   const expected = readFixtureFile('expected.txt');
   expect(result).toBe(expected);
 });

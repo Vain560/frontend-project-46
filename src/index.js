@@ -1,18 +1,36 @@
-import parseFile from './parser.js'
+import parseFile from './parser.js';
 import _ from 'lodash';
+import stylish from './formaters/stylish.js'
 
-export default (filepath1, filepath2) => {
-	const data1 = parseFile(filepath1);
+const buildDiffTree = (obj1, obj2) => {
+  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+  return keys.map(key => {
+    const [val1, val2] = [obj1[key], obj2[key]];
+
+    if (_.isPlainObject(val1) && _.isPlainObject(val2)) {
+      return { key, status: 'nested', children: buildDiffTree(val1, val2) };
+    }
+    
+    if (obj1.hasOwnProperty(key) && obj2.hasOwnProperty(key)) {
+      return val1 === val2
+        ? { key, status: 'unmodified', value: val1 }
+        : { key, status: 'updated', previous: val1, current: val2 };
+    }
+    
+    return obj1.hasOwnProperty(key)
+      ? { key, status: 'removed', value: val1 }
+      : { key, status: 'added', value: val2 };
+  });
+};
+
+export default (filepath1, filepath2, format = 'stylish') => {
+  const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
+  const diffTree = buildDiffTree(data1, data2);
 
-  const allKeys = _.union(Object.keys(data1), Object.keys(data2)).sort();
+  if (format === 'stylish') {
+    return stylish(diffTree);
+  }
 
-  const diff = allKeys.map((key) => {
-  	if(!_.has(data2, key)) return `  - ${key}: ${data1[key]}`;
-  	if(!_.has(data1, key)) return `  + ${key}: ${data2[key]}`;
-  	if (data1[key] !== data2[key]) return [`  - ${key}: ${data1[key]}`, `  + ${key}: ${data2[key]}`];
-  	return `    ${key}: ${data1[key]}`;
-  }).flat();
-
-  return`{\n${diff.join(`\n`)}\n}`;
+  throw new Error(`Unknown format: ${format}`);
 };
