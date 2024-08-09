@@ -1,6 +1,8 @@
 import parseFile from './parser.js';
 import _ from 'lodash';
-import stylish from './formaters/stylish.js'
+import formatDiff from './formatters/index.js'
+import stylish from './formatters/stylish.js'
+import plain from './formatters/plain.js'
 
 const buildDiffTree = (obj1, obj2) => {
   const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
@@ -27,10 +29,5 @@ export default (filepath1, filepath2, format = 'stylish') => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
   const diffTree = buildDiffTree(data1, data2);
-
-  if (format === 'stylish') {
-    return stylish(diffTree);
-  }
-
-  throw new Error(`Unknown format: ${format}`);
+  return formatDiff(diffTree, format)
 };
