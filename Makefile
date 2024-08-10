@@ -1,6 +1,5 @@
 install:
 	npm ci
-    npm install eslint-config-airbnb-base
 lint:
 	npx eslint .
 publish:
