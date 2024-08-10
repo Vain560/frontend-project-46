@@ -39,3 +39,14 @@ gendiff plain <FILEPATH1> <FILEPATH2>  -f plain
 ### Example of work:
 
 [![asciicast](https://asciinema.org/a/VaYQvNYOlcAY4H51phK9WuM1m.svg)](https://asciinema.org/a/VaYQvNYOlcAY4H51phK9WuM1m)
+
+## json Output
+
+To compare two files and output the result in JSON format, use the following command:
+
+```
+gendiff <FILEPATH1> <FILEPATH2>  -f json
+```
+
+### Example of work:
+[![asciicast](https://asciinema.org/a/rrlrPfLuobgZT2XG7TWMHIoBZ.svg)](https://asciinema.org/a/rrlrPfLuobgZT2XG7TWMHIoBZ)

@@ -18,21 +18,14 @@ const tests = [
   {
     file1: 'filepath1.json',
     file2: 'filepath2.json',
-    title: 'JSON',
+    title: 'Stylish json',
     format: 'stylish',
     ext: 'stylish.txt'
   },
   {
     file1: 'filepath1.yml',
     file2: 'filepath2.yml',
-    title: 'YML',
-    format: 'stylish',
-    ext: 'stylish.txt'
-  },
-  {
-    file1: 'filepath1.json',
-    file2: 'filepath2.yml',
-    title: 'mixed',
+    title: 'Stylish yml',
     format: 'stylish',
     ext: 'stylish.txt'
   },
@@ -42,7 +35,14 @@ const tests = [
     title: 'Plain',
     format: 'plain',
     ext: 'plain.txt'
-  }
+  },
+  {
+    file1: 'filepath1.json',
+    file2: 'filepath2.yml',
+    title: 'JSON',
+    format: 'json',
+    ext: 'json.txt'
+  },
 ];
 
 test.each(tests)('TEST: $title', ({ file1, file2, format, ext }) => {
