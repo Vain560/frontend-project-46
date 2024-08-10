@@ -3,7 +3,7 @@ import parseFile from './parser.js';
 import formatDiff from './formatters/index.js';
 
 const buildDiffTree = (obj1, obj2) => {
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).slice().sort();
   return keys.map((key) => {
     const [val1, val2] = [obj1[key], obj2[key]];
 
