@@ -1,12 +1,21 @@
 import _ from 'lodash';
 
-const stringify = (node) => 
-  _.isPlainObject(node) ? '[complex value]' : typeof node === 'string' ? `'${node}'` : node;
+const stringify = (node) => {
+  if (_.isPlainObject(node)) {
+    return '[complex value]';
+  }
+  if (typeof node === 'string') {
+    return `'${node}'`;
+  }
+  return node;
+};
 
 export default (diffTree) => {
-  const iter = (node, path = '') => 
-    node.map(({ key, status, value, previous, current, children }) => {
-      const currentPath = path ? `${path}.${key}` : key;  // Формируем currentPath без удаления первого символа
+  const iter = (node, path = '') => node
+    .map(({
+      key, status, value, previous, current, children,
+    }) => {
+      const currentPath = path ? `${path}.${key}` : key;
       switch (status) {
         case 'removed':
           return `Property '${currentPath}' was removed`;

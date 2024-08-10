@@ -20,32 +20,34 @@ const tests = [
     file2: 'filepath2.json',
     title: 'Stylish json',
     format: 'stylish',
-    ext: 'stylish.txt'
+    ext: 'stylish.txt',
   },
   {
     file1: 'filepath1.yml',
     file2: 'filepath2.yml',
     title: 'Stylish yml',
     format: 'stylish',
-    ext: 'stylish.txt'
+    ext: 'stylish.txt',
   },
   {
     file1: 'filepath1.json',
     file2: 'filepath2.yml',
     title: 'Plain',
     format: 'plain',
-    ext: 'plain.txt'
+    ext: 'plain.txt',
   },
   {
     file1: 'filepath1.json',
     file2: 'filepath2.yml',
     title: 'JSON',
     format: 'json',
-    ext: 'json.txt'
+    ext: 'json.txt',
   },
 ];
 
-test.each(tests)('TEST: $title', ({ file1, file2, format, ext }) => {
+test.each(tests)('TEST: $title', ({
+  file1, file2, format, ext,
+}) => {
   const result = diff(file1, file2, format);
   const expected = readFixtureFile(ext);
   expect(result).toBe(expected);
