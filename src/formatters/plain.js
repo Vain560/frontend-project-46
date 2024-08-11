@@ -25,8 +25,10 @@ export default (diffTree) => {
           return `Property '${currentPath}' was updated. From ${stringify(previous)} to ${stringify(current)}`;
         case 'nested':
           return iter(children, currentPath);
-        default:
+        case 'unmodified':
           return null;
+        default:
+          throw new Error(`Unknown status: ${status}`);
       }
     })
     .filter(Boolean)

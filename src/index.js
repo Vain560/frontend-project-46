@@ -1,34 +1,18 @@
-import _ from 'lodash';
+import path from 'path';
 import parseFile from './parser.js';
 import formatDiff from './formatters/index.js';
+import buildDiffTree from './buildDiffTree.js';
 
-const buildDiffTree = (obj1, obj2) => {
-  const keys = _.sortBy(_.uniq([...Object.keys(obj1), ...Object.keys(obj2)]));
-  return keys.map((key) => {
-    const [val1, val2] = [obj1[key], obj2[key]];
-
-    if (_.isPlainObject(val1) && _.isPlainObject(val2)) {
-      return { key, status: 'nested', children: buildDiffTree(val1, val2) };
-    }
-
-    if (Object.prototype.hasOwnProperty.call(obj1, key)
-    && Object.prototype.hasOwnProperty.call(obj2, key)) {
-      return val1 === val2
-        ? { key, status: 'unmodified', value: val1 }
-        : {
-          key, status: 'updated', previous: val1, current: val2,
-        };
-    }
-
-    return Object.prototype.hasOwnProperty.call(obj1, key)
-      ? { key, status: 'removed', value: val1 }
-      : { key, status: 'added', value: val2 };
-  });
-};
+const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
+const getExtname = (filepath) => path.extname(filepath).toLowerCase();
 
 export default (filepath1, filepath2, format = 'stylish') => {
-  const data1 = parseFile(filepath1);
-  const data2 = parseFile(filepath2);
+  const path1 = getAbsolutePath(filepath1);
+  const path2 = getAbsolutePath(filepath2);
+  const ext1 = getExtname(path1);
+  const ext2 = getExtname(path2);
+  const data1 = parseFile(path1, ext1);
+  const data2 = parseFile(path2, ext2);
   const diffTree = buildDiffTree(data1, data2);
   return formatDiff(diffTree, format);
 };

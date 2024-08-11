@@ -18,6 +18,12 @@ const tests = [
   {
     file1: 'filepath1.json',
     file2: 'filepath2.json',
+    title: 'without format',
+    ext: 'stylish.txt',
+  },
+  {
+    file1: 'filepath1.json',
+    file2: 'filepath2.json',
     title: 'Stylish json',
     format: 'stylish',
     ext: 'stylish.txt',

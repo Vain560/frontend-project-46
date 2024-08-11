@@ -30,7 +30,7 @@ const stylish = (diffTree) => {
       ...nodes.map(({
         key, status, value, previous, current, children,
       }) => {
-        const prefix = `${indent}${marks[status]}${key}`;
+        const prefix = `${indent}${marks[status] || ''}${key}`;
 
         switch (status) {
           case 'removed':
@@ -44,8 +44,10 @@ const stylish = (diffTree) => {
             ].join('\n');
           case 'nested':
             return `${prefix}: ${iter(children, depth + 1)}`;
-          default:
+          case 'unmodified':
             return `${prefix}: ${stringify(value, depth + 1)}`;
+          default:
+            throw new Error(`Unknown status: ${status}`);
         }
       }),
       `${getSpaces(depth - 1)}${marks.closeBracket}`,
